@@ -1,0 +1,11 @@
+Pyodide 0.28.3 — Mozilla Public License 2.0 (MPL-2.0)
+Copyright (c) Pyodide contributors
+
+Archivos incluidos aquí (pyodide.js, pyodide.asm.js, pyodide.asm.wasm,
+python_stdlib.zip, pyodide-lock.json) provienen del paquete npm oficial
+"pyodide@0.28.3" y se redistribuyen sin modificaciones.
+
+Texto completo de la licencia: https://www.mozilla.org/en-US/MPL/2.0/
+Código fuente: https://github.com/pyodide/pyodide
+python_stdlib.zip contiene la librería estándar de CPython, bajo la
+Python Software Foundation License: https://docs.python.org/3/license.html

@@ -8,17 +8,22 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://biowasm.com 'wasm-unsafe-eval'; worker-src 'self' blob:; connect-src 'self' https://biowasm.com; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; manifest-src 'self'">
 <meta name="referrer" content="no-referrer">
 <title>READMYFASTA · Abre FASTA, FASTQ, BAM, CSV y PDB en tu navegador</title>
-<meta name="description" content="Herramienta gratuita y de código abierto para abrir y analizar archivos FASTA, FASTQ, BAM, CSV/TSV, PDB y mmCIF en el navegador, sin programar y sin subir datos a ningún servidor.">
+<meta name="description" content="Herramienta gratuita con código disponible en GitHub para abrir y analizar archivos FASTA, FASTQ, BAM, CSV/TSV, PDB y mmCIF en el navegador, sin subir tus datos.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121B18" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
+<link rel="canonical" href="https://readmyfasta.vercel.app/">
+<meta property="og:url" content="https://readmyfasta.vercel.app/">
 <meta property="og:title" content="READMYFASTA · Explora tus datos de secuenciación sin programar">
 <meta property="og:description" content="FASTA, FASTQ, BAM, CSV y PDB en el navegador. Procesamiento 100 % local: tus datos no salen de tu ordenador.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://readmyfasta.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="READMYFASTA · Explora tus datos de secuenciación sin programar">
+<meta name="twitter:description" content="Analiza FASTA, FASTQ, BAM, tablas y estructuras en el navegador. Tus archivos se quedan en tu equipo.">
+<meta name="twitter:image" content="https://readmyfasta.vercel.app/og-image.png">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -98,14 +103,14 @@
 
 <section class="hero" aria-labelledby="heroTitle">
   <div class="wrap hero-inner">
-    <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">Herramienta gratuita · Código abierto</span></p>
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">Herramienta gratuita · Código fuente disponible</span></p>
     <h1 id="heroTitle" data-i18n="heroTitle">Tus datos de secuenciación, legibles en segundos</h1>
     <p class="sub" data-i18n="subtitle">Abre y explora FASTA, FASTQ, BAM, CSV/TSV, PDB y mmCIF directamente en el navegador.</p>
     <ul class="trust">
       <li><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="trustLocal">100 % local</span></li>
       <li><svg class="icon" aria-hidden="true"><use href="#i-wifi-off"/></svg><span data-i18n="trustOffline">Funciona sin conexión</span></li>
       <li><svg class="icon" aria-hidden="true"><use href="#i-user-x"/></svg><span data-i18n="trustNoAccount">Sin registro</span></li>
-      <li><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><span data-i18n="trustOpen">Código abierto</span></li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><a class="trust-source" href="https://github.com/glix-cmd/readmyfasta" target="_blank" rel="noopener noreferrer" data-i18n="trustOpen">Código en GitHub</a></li>
     </ul>
     <div class="basetape" aria-hidden="true"><span class="basetape-inner" id="tape"></span></div>
   </div>
@@ -144,7 +149,7 @@
     <div id="dropError" class="drop-error" role="alert" hidden></div>
 
     <div class="status-row">
-      <p class="engine-status" aria-live="polite"><span class="pip busy" id="enginePip" aria-hidden="true"></span><span id="engineText" data-i18n="engineLoading">Preparando el motor de análisis…</span></p>
+      <p class="engine-status" aria-live="polite"><span class="pip" id="enginePip" aria-hidden="true"></span><span id="engineText" data-i18n="engineIdle">El motor se carga cuando empiezas un análisis.</span></p>
     </div>
 
     <div id="progressBox" class="progress-box" hidden>
@@ -366,8 +371,18 @@
       <h2 class="footer-title" data-i18n="footerTechTitle">Tecnología</h2>
       <p>Python · Pyodide · WebAssembly<br>Chart.js · 3Dmol.js · samtools (biowasm)</p>
     </div>
+    <div class="footer-project">
+      <h2 class="footer-title" data-i18n="footerProjectTitle">Proyecto</h2>
+      <p><a href="https://github.com/glix-cmd/readmyfasta" target="_blank" rel="noopener noreferrer" data-i18n="footerRepo">Código fuente en GitHub</a></p>
+      <p><span data-i18n="footerAuthorLabel">Autoría:</span> <a href="https://github.com/glix-cmd" target="_blank" rel="noopener noreferrer">glix-cmd</a></p>
+      <details class="footer-citation">
+        <summary data-i18n="footerCitationTitle">Cómo citar</summary>
+        <p><span data-i18n="footerCitation">glix-cmd. 2026. READMYFASTA, versión 2.4.2.</span><br><a href="https://readmyfasta.vercel.app/" data-i18n="footerCitationLink">URL del proyecto</a></p>
+      </details>
+      <p class="footer-changelog" data-i18n="footerChangelog">v2.4.2 · Carga diferida del motor, mejoras SEO y cita visible.</p>
+    </div>
   </div>
-  <div class="wrap footer-bottom"><span id="appVersion"></span><span data-i18n="footerLicense">Licencias de terceros en vendor/</span></div>
+  <div class="wrap footer-bottom"><span id="appVersion"></span><span data-i18n="footerLicense">Licencias de terceros en vendor/</span><span data-i18n="footerProjectLicense">Licencia del proyecto aún no especificada.</span></div>
 </footer>
 
 <div class="drop-overlay" id="dropOverlay" hidden><div><span class="do-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span><span data-i18n="dropOverlay">Suelta el archivo para analizarlo</span></div></div>

@@ -1,10 +1,20 @@
 # READMYFASTA
 
-Herramienta web gratuita y de código abierto para abrir y explorar archivos
+Herramienta web gratuita, con código fuente disponible públicamente, para abrir y explorar archivos
 FASTA, FASTQ, BAM/SAM, CSV/TSV, PDB y mmCIF directamente en el navegador: sin
 instalación, sin cuenta y sin que ningún archivo salga del ordenador del
 usuario. El análisis corre en el propio navegador (Python vía Pyodide dentro de
 un Web Worker, y samtools compilado a WebAssembly para BAM).
+
+La licencia del código principal aún no está especificada en el repositorio.
+Las licencias de las dependencias de terceros se documentan junto a cada paquete.
+
+## Cambios en 2.4.2
+
+- Pyodide se carga cuando el usuario se acerca a la zona de carga o empieza un análisis; sus archivos se guardan en caché tras la primera descarga.
+- Se añaden metadatos canónicos y de redes sociales, `robots.txt` y `sitemap.xml` para el dominio actual.
+- El pie de página enlaza el repositorio, muestra autoría y cita el software.
+- `.vercelignore` mantiene fuera de la web publicada las pruebas y herramientas internas.
 
 ## Arrancar en local (2 minutos)
 
@@ -26,7 +36,7 @@ Es un sitio 100 % estático: sube la carpeta completa tal cual.
 - **Netlify / Cloudflare Pages**: arrastra la carpeta al panel. El archivo
   `_headers` aplica solo las cabeceras de seguridad.
 - **Vercel**: importa la carpeta o el repositorio. `vercel.json` aplica las
-  cabeceras de seguridad. Sin build command.
+  cabeceras de seguridad y `.vercelignore` excluye archivos internos. Sin build command.
 - **GitHub Pages**: sube el contenido a la raíz del repositorio (o a `/docs`) y
   activa Pages. GitHub Pages no admite cabeceras propias, pero la CSP ya va
   incluida en `index.html` como `<meta>`.
@@ -42,7 +52,7 @@ Es un sitio 100 % estático: sube la carpeta completa tal cual.
 - **Iconos SVG propios** en lugar de emojis: trazo uniforme, heredan el color del tema y se
   ven igual en todos los sistemas (los emojis cambian de aspecto según el dispositivo).
 - **Barra de navegación con marca**, portada con propuesta de valor y garantías visibles
-  (100 % local, sin conexión, sin registro, código abierto) y la zona de carga destacada.
+  (100 % local, sin conexión tras cargar el motor, sin registro, código en GitHub) y la zona de carga destacada.
 - **Logotipo renovado**, iconos PNG para Android, iOS y modo app (incluido icono adaptable), e
   **imagen para compartir** de 1200×630 para LinkedIn, WhatsApp o X. Se regeneran con
   `python tools/render_icons.py` a partir de `icon.svg` y `tools/og-template.html`.
@@ -130,6 +140,10 @@ python3 serve.py
 ```
 readmyfasta/
 ├── index.html              ← página principal (con CSP, metadatos y estructura accesible)
+├── robots.txt / sitemap.xml← indexación en buscadores
+├── .vercelignore            ← archivos que no se publican en Vercel
+├── CHANGELOG.md             ← cambios de versión
+├── CITATION.cff             ← metadatos de cita para GitHub
 ├── serve.py                ← servidor local de desarrollo
 ├── sw.js                   ← service worker: uso sin conexión tras la primera visita
 ├── manifest.webmanifest    ← instalable como app (PWA)

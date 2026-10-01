@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: If you use READMYFASTA, please cite this software.
+type: software
+title: READMYFASTA
+version: 2.4.2
+date-released: "2026-10-01"
+authors:
+  - name: glix-cmd
+repository-code: https://github.com/glix-cmd/readmyfasta
+url: https://readmyfasta.vercel.app/

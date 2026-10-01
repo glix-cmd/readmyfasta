@@ -3,7 +3,7 @@
 'use strict';
 
 (() => {
-  const APP_VERSION = '2.4.1';
+  const APP_VERSION = '2.4.2';
   const $ = (id) => document.getElementById(id);
   const I18N = window.I18N;
 
@@ -106,9 +106,18 @@
   let viewer3d = null;
 
   // ------------------------------------------------------------------ motor (Web Worker)
-  const engine = { worker: null, ready: false, seq: 0, pending: new Map(), readyPromise: null, onProgress: null };
+  const engine = { worker: null, ready: false, status: 'idle', error: '', seq: 0, pending: new Map(), readyPromise: null, onProgress: null };
+
+  function engineStatusText() {
+    if (engine.status === 'ready') return t('engineReady');
+    if (engine.status === 'loading') return t('engineLoading');
+    if (engine.status === 'error') return t('engineError', engine.error || 'worker');
+    return t('engineIdle');
+  }
 
   function startEngine() {
+    engine.status = 'loading';
+    engine.error = '';
     const pip = $('enginePip');
     pip.className = 'pip busy';
     $('engineText').textContent = t('engineLoading');
@@ -119,6 +128,9 @@
     try {
       engine.worker = new Worker('src/js/worker.js');
     } catch (err) {
+      engine.status = 'error';
+      engine.error = err.message;
+      pip.className = 'pip';
       $('engineText').textContent = t('engineError', err.message);
       rejectReady(err);
       return;
@@ -126,10 +138,13 @@
     engine.worker.onmessage = ({ data }) => {
       if (data.type === 'ready') {
         engine.ready = true;
+        engine.status = 'ready';
         pip.className = 'pip ok';
         $('engineText').textContent = t('engineReady');
         resolveReady();
       } else if (data.type === 'fatal') {
+        engine.status = 'error';
+        engine.error = data.message;
         pip.className = 'pip';
         $('engineText').textContent = t('engineError', data.message);
         rejectReady(new Error(data.message));
@@ -145,6 +160,8 @@
     };
     engine.worker.onerror = (e) => {
       if (!engine.ready) {
+        engine.status = 'error';
+        engine.error = e.message || 'worker';
         $('engineText').textContent = t('engineError', e.message || 'worker');
         rejectReady(new Error(e.message));
         return;
@@ -156,12 +173,17 @@
     };
   }
 
+  function ensureEngine() {
+    if (engine.status === 'idle') startEngine();
+    return engine.readyPromise;
+  }
+
   class UserError extends Error {
     constructor(code, info) { super(code); this.code = code; this.info = info || {}; }
   }
 
   async function call(cmd, args) {
-    await engine.readyPromise;
+    await ensureEngine();
     const msg = await new Promise((resolve, reject) => {
       const id = ++engine.seq;
       engine.pending.set(id, { resolve, reject });
@@ -1571,7 +1593,7 @@
     });
     applyStaticI18n();
     renderFormatsInfo();
-    $('engineText').textContent = engine.ready ? t('engineReady') : t('engineLoading');
+    $('engineText').textContent = engineStatusText();
     if (state.result) {
       if (state.kind === 'bam') renderBam();
       else if (state.kind === 'structure') {
@@ -1603,6 +1625,12 @@
 
   // ------------------------------------------------------------------ entradas: selector, arrastrar, pegar, ejemplos
   const fileInput = $('fileInput');
+  const warmEngine = () => { ensureEngine(); };
+  $('dropzone').addEventListener('pointerenter', warmEngine, { once: true });
+  $('dropzone').addEventListener('focusin', warmEngine, { once: true });
+  const exampleGrid = document.querySelector('.example-grid');
+  exampleGrid.addEventListener('pointerenter', warmEngine, { once: true });
+  exampleGrid.addEventListener('focusin', warmEngine, { once: true });
   fileInput.addEventListener('change', (e) => { routeFiles(e.target.files); e.target.value = ''; });
   const hasFiles = (e) => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
   let dragDepth = 0;
@@ -1674,7 +1702,6 @@
   setLanguage(LANG);
   applyTheme(themeMode(), false);
   $('appVersion').textContent = `READMYFASTA v${APP_VERSION}`;
-  startEngine();
 
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
     const hadController = !!navigator.serviceWorker.controller;

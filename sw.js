@@ -1,14 +1,12 @@
 // READMYFASTA — service worker: permite usar la herramienta sin conexión tras la primera visita.
 // Las librerías pesadas (vendor/) se sirven desde caché; el código propio se pide primero a la red
 // para que las actualizaciones lleguen enseguida.
-const VERSION = 'rmf-v2.4.1';
+const VERSION = 'rmf-v2.4.2';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
   'vendor/fonts/inter-latin-wght-normal.woff2', 'vendor/fonts/source-serif-4-latin-opsz-normal.woff2',
   'vendor/fonts/jetbrains-mono-latin-wght-normal.woff2',
   'src/css/styles.css', 'src/js/theme-boot.js', 'src/js/i18n.js', 'src/js/app.js', 'src/js/worker.js', 'src/py/core.py', 'src/py/fastq_extras.py',
-  'vendor/pyodide/pyodide.js', 'vendor/pyodide/pyodide.asm.js', 'vendor/pyodide/pyodide.asm.wasm',
-  'vendor/pyodide/python_stdlib.zip', 'vendor/pyodide/pyodide-lock.json',
   'vendor/chartjs/chart.umd.js', 'vendor/3dmol/3Dmol-min.js',
 ];
 
@@ -28,7 +26,15 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return; // biowasm.com no se toca
   const isVendor = url.pathname.includes('/vendor/');
   if (isVendor) {
-    event.respondWith(caches.match(event.request).then((hit) => hit || fetch(event.request)));
+    event.respondWith(caches.match(event.request).then(async (hit) => {
+      if (hit) return hit;
+      const response = await fetch(event.request);
+      if (response.ok) {
+        const cache = await caches.open(VERSION);
+        await cache.put(event.request, response.clone());
+      }
+      return response;
+    }));
     return;
   }
   event.respondWith(

@@ -1,0 +1,9 @@
+tests/
+tools/
+workflows/
+README.md
+CHANGELOG.md
+CITATION.cff
+vendor.lock.json
+.editorconfig
+.gitignore

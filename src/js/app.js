@@ -3,7 +3,7 @@
 'use strict';
 
 (() => {
-  const APP_VERSION = '2.4.2';
+  const APP_VERSION = '2.5.0';
   const $ = (id) => document.getElementById(id);
   const I18N = window.I18N;
 
@@ -1673,6 +1673,9 @@
     csv: ['data/ejemplo_resultados.csv'], tsv: ['data/ejemplo_metadatos.tsv'], pdb: ['data/ejemplo_estructura.pdb'],
     bam: ['data/ejemplo_alineamientos.bam', 'data/ejemplo_alineamientos.bam.bai'],
   };
+  // La vista previa de la portada abre el ejemplo FASTQ que resume
+  const heroTry = $('heroTry');
+  if (heroTry) heroTry.addEventListener('click', () => { const b = document.querySelector('.example-grid [data-example="fastq"]'); if (b && !b.disabled) b.click(); });
   document.querySelector('.example-grid').addEventListener('click', async (e) => {
     const b = e.target.closest('[data-example]');
     if (!b) return;

@@ -1,12 +1,12 @@
 // READMYFASTA — service worker: permite usar la herramienta sin conexión tras la primera visita.
 // Las librerías pesadas (vendor/) se sirven desde caché; el código propio se pide primero a la red
 // para que las actualizaciones lleguen enseguida.
-const VERSION = 'rmf-v2.4.2';
+const VERSION = 'rmf-v2.5.0';
 const SHELL = [
-  './', 'index.html', 'manifest.webmanifest', 'icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
+  './', 'index.html', 'legal.html', 'manifest.webmanifest', 'icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
   'vendor/fonts/inter-latin-wght-normal.woff2', 'vendor/fonts/source-serif-4-latin-opsz-normal.woff2',
   'vendor/fonts/jetbrains-mono-latin-wght-normal.woff2',
-  'src/css/styles.css', 'src/js/theme-boot.js', 'src/js/i18n.js', 'src/js/app.js', 'src/js/worker.js', 'src/py/core.py', 'src/py/fastq_extras.py',
+  'src/css/styles.css', 'src/js/theme-boot.js', 'src/js/i18n.js', 'src/js/app.js', 'src/js/worker.js', 'src/js/legal.js', 'src/py/core.py', 'src/py/fastq_extras.py',
   'vendor/chartjs/chart.umd.js', 'vendor/3dmol/3Dmol-min.js',
 ];
 

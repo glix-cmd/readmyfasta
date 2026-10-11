@@ -6,8 +6,19 @@ instalación, sin cuenta y sin que ningún archivo salga del ordenador del
 usuario. El análisis corre en el propio navegador (Python vía Pyodide dentro de
 un Web Worker, y samtools compilado a WebAssembly para BAM).
 
-La licencia del código principal aún no está especificada en el repositorio.
-Las licencias de las dependencias de terceros se documentan junto a cada paquete.
+**Gratuita para cualquier uso, con todos los derechos reservados.** © 2026 glix-cmd: la herramienta se puede usar
+libremente, pero la autoría y el código son de su autor y no se pueden copiar, modificar ni redistribuir sin
+permiso. Ver [Licencia](#licencia), `LICENSE` y `legal.html`.
+
+## Cambios en 2.5.0
+
+- **Aviso legal y licencia**: `LICENSE` (todos los derechos reservados, uso gratuito), página `legal.html` bilingüe con el
+  estilo de la web y `THIRD_PARTY_NOTICES.md`. El pie muestra «© 2026 glix-cmd · Todos los derechos reservados» y enlaza
+  al aviso legal; se retira la mención a «código abierto», que no correspondía.
+- **Portada con vista previa del análisis**: una tarjeta muestra lo que se obtiene con el ejemplo FASTQ (calidad media,
+  bases ≥ Q30, %GC, curva de calidad por posición y avisos), con las cifras reales del archivo de ejemplo. Un botón abre
+  el análisis completo. En pantallas estrechas se oculta para no alargar la página.
+- Caché del modo sin conexión renovada (`rmf-v2.5.0`) para que todos los visitantes reciban la nueva versión.
 
 ## Cambios en 2.4.2
 
@@ -302,3 +313,16 @@ Pyodide (MPL-2.0), Chart.js (MIT), 3Dmol.js (BSD-3-Clause), Aioli (MIT, cargada 
 JetBrains Mono (SIL Open Font License 1.1). Iconos dibujados siguiendo el estilo de Lucide (ISC).
 Los textos o avisos de licencia correspondientes están junto a cada librería en
 `vendor/` (para Pyodide, `vendor/pyodide/NOTICE.txt`).
+
+## Licencia
+
+© 2026 [glix-cmd](https://github.com/glix-cmd). **Todos los derechos reservados.**
+
+- **Puedes**: usar READMYFASTA gratis y para cualquier fin (personal, académico o profesional) desde su web oficial;
+  tus datos y los resultados que obtengas son tuyos; puedes revisar el código para comprobar cómo funciona y citarla.
+- **No puedes, sin permiso previo y por escrito**: copiar, modificar o redistribuir el código; publicar o alojar copias
+  o versiones derivadas; reutilizarlo en otros proyectos, ni presentarlo como propio.
+
+El código es visible en GitHub por transparencia; eso no concede ninguna licencia sobre él, más allá de lo que los
+Términos de servicio de GitHub permiten dentro de la plataforma (ver y bifurcar el repositorio en GitHub). Las
+librerías y tipografías de terceros conservan sus propias licencias: ver `THIRD_PARTY_NOTICES.md` y `vendor/`.

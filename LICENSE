@@ -1,0 +1,69 @@
+READMYFASTA
+Copyright (c) 2026 glix-cmd (https://github.com/glix-cmd)
+
+TODOS LOS DERECHOS RESERVADOS.
+
+READMYFASTA es una herramienta gratuita. Cualquier persona puede usarla, sin coste
+y para cualquier fin (personal, académico o profesional), a través de su web oficial
+(https://readmyfasta.vercel.app/). Los datos que analices y los resultados, informes
+y exportaciones que obtengas son tuyos.
+
+La autoría y todos los derechos sobre el código fuente, el diseño, los textos, los
+iconos, el logotipo y los datos de ejemplo de READMYFASTA pertenecen a glix-cmd.
+Salvo autorización previa y por escrito del autor, no está permitido:
+
+  - copiar, reproducir, modificar o adaptar el código, total o parcialmente;
+  - redistribuir el software o publicar, alojar o desplegar copias o versiones
+    derivadas, con o sin cambios;
+  - reutilizar el código, o partes de él, en otros proyectos;
+  - presentar la herramienta o su código como propios, o eliminar los avisos de
+    autoría.
+
+El código se publica en GitHub para que cualquiera pueda revisar cómo funciona y
+comprobar que los archivos no salen del navegador. Su publicación no concede ninguna
+licencia sobre él, más allá de lo que los Términos de servicio de GitHub permiten
+dentro de la propia plataforma (ver el repositorio y bifurcarlo en GitHub).
+
+Si usas READMYFASTA en un trabajo publicado, cítalo (ver CITATION.cff).
+
+Esta reserva de derechos no se aplica a los componentes de terceros (Pyodide,
+Chart.js, 3Dmol.js, las tipografías Inter, Source Serif 4 y JetBrains Mono, y
+samtools/Aioli cargados desde biowasm.com), que conservan sus propias licencias:
+ver THIRD_PARTY_NOTICES.md y la carpeta vendor/.
+
+EL SOFTWARE SE OFRECE "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO. No es un producto
+sanitario ni sustituye la revisión de un profesional.
+
+---------------------------------------------------------------------------------
+
+ALL RIGHTS RESERVED.
+
+READMYFASTA is a free tool. Anyone may use it, at no cost and for any purpose
+(personal, academic or professional), through its official website
+(https://readmyfasta.vercel.app/). The data you analyse and the results, reports
+and exports you obtain are yours.
+
+Authorship of and all rights to the source code, design, texts, icons, logo and
+example data of READMYFASTA belong to glix-cmd. Unless the author gives prior
+written permission, you may not:
+
+  - copy, reproduce, modify or adapt the code, in whole or in part;
+  - redistribute the software or publish, host or deploy copies or derivative
+    versions, with or without changes;
+  - reuse the code, or parts of it, in other projects;
+  - present the tool or its code as your own, or remove the authorship notices.
+
+The code is published on GitHub so that anyone can review how it works and verify
+that files never leave the browser. Publishing it does not grant any licence to it,
+beyond what GitHub's Terms of Service allow within the platform itself (viewing the
+repository and forking it on GitHub).
+
+If you use READMYFASTA in published work, please cite it (see CITATION.cff).
+
+This reservation of rights does not apply to third-party components (Pyodide,
+Chart.js, 3Dmol.js, the Inter, Source Serif 4 and JetBrains Mono typefaces, and
+samtools/Aioli loaded from biowasm.com), which keep their own licences: see
+THIRD_PARTY_NOTICES.md and the vendor/ folder.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND. It is not a medical
+device and does not replace review by a professional.

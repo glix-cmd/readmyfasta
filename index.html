@@ -103,6 +103,7 @@
 
 <section class="hero" aria-labelledby="heroTitle">
   <div class="wrap hero-inner">
+   <div class="hero-copy">
     <p class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">Herramienta gratuita · Código fuente disponible</span></p>
     <h1 id="heroTitle" data-i18n="heroTitle">Tus datos de secuenciación, legibles en segundos</h1>
     <p class="sub" data-i18n="subtitle">Abre y explora FASTA, FASTQ, BAM, CSV/TSV, PDB y mmCIF directamente en el navegador.</p>
@@ -112,6 +113,35 @@
       <li><svg class="icon" aria-hidden="true"><use href="#i-user-x"/></svg><span data-i18n="trustNoAccount">Sin registro</span></li>
       <li><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><a class="trust-source" href="https://github.com/glix-cmd/readmyfasta" target="_blank" rel="noopener noreferrer" data-i18n="trustOpen">Código en GitHub</a></li>
     </ul>
+   </div>
+   <aside class="hero-preview" aria-labelledby="hpTitle">
+    <div class="hp-head">
+     <span class="hp-file"><span class="hp-ico" aria-hidden="true"><svg class="icon"><use href="#i-flask"/></svg></span><span><b id="hpTitle">ejemplo.fastq.gz</b><small data-i18n="hpMeta">8.000 lecturas · 150 pb</small></span></span>
+     <span class="hp-badge" data-i18n="hpBadge">Ejemplo real</span>
+    </div>
+    <div class="hp-stats">
+     <div><span data-i18n="hpQual">Calidad media</span><b class="hp-good"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg><span data-i18n="hpQualVal">Q31,5</span></b></div>
+     <div><span data-i18n="hpQ30">Bases ≥ Q30</span><b data-i18n="hpQ30Val">71,5 %</b></div>
+     <div><span>%GC</span><b data-i18n="hpGCVal">47,1 %</b></div>
+    </div>
+    <figure class="hp-chart">
+     <figcaption data-i18n="hpChart">Calidad media por posición</figcaption>
+     <svg viewBox="0 0 300 112" role="img" data-i18n-aria="hpChartAria" aria-label="La calidad media baja de Q36 al inicio de la lectura a Q25 al final">
+      <defs><linearGradient id="hpGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+      <line class="hp-ref" x1="12" x2="270" y1="49.0" y2="49.0"/><text class="hp-reft" x="296" y="52.0" text-anchor="end">Q30</text>
+      <line class="hp-ref" x1="12" x2="270" y1="83.0" y2="83.0"/><text class="hp-reft" x="296" y="86.0" text-anchor="end">Q20</text>
+      <path d="M12.0,100 L12.0,28.9 L31.7,29.3 L51.4,29.9 L71.1,30.9 L90.9,32.3 L110.6,34.1 L130.3,36.2 L150.0,38.7 L169.7,41.6 L189.4,44.9 L209.1,48.4 L228.9,52.4 L248.6,56.7 L268.3,61.4 L288.0,66.4 L288.0,100 Z" fill="url(#hpGrad)"/>
+      <polyline class="hp-line" points="12.0,28.9 31.7,29.3 51.4,29.9 71.1,30.9 90.9,32.3 110.6,34.1 130.3,36.2 150.0,38.7 169.7,41.6 189.4,44.9 209.1,48.4 228.9,52.4 248.6,56.7 268.3,61.4 288.0,66.4"/>
+      <line class="hp-axis" x1="12" x2="288" y1="100" y2="100"/>
+      <text class="hp-axt" x="12" y="111">1</text><text class="hp-axt" x="288" y="111" text-anchor="end">150 pb</text>
+     </svg>
+    </figure>
+    <ul class="hp-flags">
+     <li class="ok"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg><span data-i18n="hpFlagOk">Calidad excelente para Illumina</span></li>
+     <li class="warn"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span data-i18n="hpFlagWarn">14,8 % de lecturas con adaptadores</span></li>
+    </ul>
+    <button type="button" class="hp-try" id="heroTry"><span data-i18n="hpTry">Ver este análisis completo</span><svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+   </aside>
     <div class="basetape" aria-hidden="true"><span class="basetape-inner" id="tape"></span></div>
   </div>
 </section>
@@ -361,7 +391,7 @@
   <div class="wrap footer-grid">
     <div class="footer-brand">
       <span class="brand"><img class="brand-mark" src="icon.svg" alt="" width="26" height="26"><span class="wordmark">READ<span>MY</span>FASTA</span></span>
-      <p data-i18n="footer">Herramienta gratuita y de código abierto.</p>
+      <p data-i18n="footer">Herramienta gratuita para explorar datos de secuenciación, con el código fuente disponible en GitHub.</p>
     </div>
     <div>
       <h2 class="footer-title" data-i18n="footerPrivacyTitle">Privacidad</h2>
@@ -377,12 +407,13 @@
       <p><span data-i18n="footerAuthorLabel">Autoría:</span> <a href="https://github.com/glix-cmd" target="_blank" rel="noopener noreferrer">glix-cmd</a></p>
       <details class="footer-citation">
         <summary data-i18n="footerCitationTitle">Cómo citar</summary>
-        <p><span data-i18n="footerCitation">glix-cmd. 2026. READMYFASTA, versión 2.4.2.</span><br><a href="https://readmyfasta.vercel.app/" data-i18n="footerCitationLink">URL del proyecto</a></p>
+        <p><span data-i18n="footerCitation">glix-cmd. 2026. READMYFASTA, versión 2.5.0.</span><br><a href="https://readmyfasta.vercel.app/" data-i18n="footerCitationLink">URL del proyecto</a></p>
       </details>
-      <p class="footer-changelog" data-i18n="footerChangelog">v2.4.2 · Carga diferida del motor, mejoras SEO y cita visible.</p>
+      <p><a href="legal.html" data-i18n="footerLegal">Aviso legal y licencia</a></p>
+      <p class="footer-changelog" data-i18n="footerChangelog">v2.5.0 · Aviso legal, vista previa del análisis en la portada.</p>
     </div>
   </div>
-  <div class="wrap footer-bottom"><span id="appVersion"></span><span data-i18n="footerLicense">Licencias de terceros en vendor/</span><span data-i18n="footerProjectLicense">Licencia del proyecto aún no especificada.</span></div>
+  <div class="wrap footer-bottom"><span id="appVersion"></span><span class="footer-rights">© 2026 <a href="https://github.com/glix-cmd" target="_blank" rel="noopener noreferrer">glix-cmd</a> · <span data-i18n="footerRights">Todos los derechos reservados</span></span><span class="footer-legal-links"><a href="legal.html" data-i18n="footerLegal">Aviso legal y licencia</a> · <a href="legal.html#terceros" data-i18n="footerLicense">Licencias de terceros</a></span></div>
 </footer>
 
 <div class="drop-overlay" id="dropOverlay" hidden><div><span class="do-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg></span><span data-i18n="dropOverlay">Suelta el archivo para analizarlo</span></div></div>

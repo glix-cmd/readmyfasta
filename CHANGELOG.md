@@ -6,6 +6,9 @@
 - Pie con «© 2026 glix-cmd · Todos los derechos reservados» y enlaces al aviso legal y a las licencias de terceros; se corrige el texto «de código abierto».
 - Portada con una tarjeta de vista previa del análisis (cifras y curva de calidad reales del ejemplo FASTQ) y botón para abrirlo.
 - Caché del service worker `rmf-v2.5.0`; `legal.html` en el sitemap.
+- Integración continua en `.github/workflows/` (antes no se ejecutaba) con verificación de `vendor/`.
+- `vendor/`: cinco archivos restaurados a sus finales de línea originales; `.gitattributes` evita la conversión.
+- `tests/e2e.py`: adaptado a la carga diferida del motor y sin la carrera de tiempos al pegar una secuencia (38 comprobaciones).
 
 ## 2.4.2 — 2026-10-01
 

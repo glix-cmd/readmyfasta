@@ -92,8 +92,12 @@ async def run(shots):
         await pg.add_init_script("document.addEventListener('securitypolicyviolation', e =>"
                                  " console.error('CSP', e.violatedDirective, e.blockedURI))")
         await pg.goto(base)
+        # Desde 2.4.2 el motor se carga bajo demanda: no debe arrancar solo al abrir la página
+        await expect(pg.locator('#engineText')).to_have_text('El motor se carga cuando empiezas un análisis.')
+        check('motor en espera al abrir la página (carga diferida)', True)
+        await pg.locator('#dropzone').hover()          # acercarse a la zona de carga lo pone en marcha
         await expect(pg.locator('#engineText')).to_have_text('Motor de análisis listo', timeout=120000)
-        check('motor Python listo en el worker', True)
+        check('motor Python listo en el worker al acercarse a la zona de carga', True)
         if shots:
             await pg.screenshot(path=os.path.join(shots, '01_inicio_claro.png'), full_page=True)
 
@@ -168,6 +172,7 @@ async def run(shots):
             await pg.wait_for_timeout(400)
             await pg.screenshot(path=os.path.join(shots, '04_run_oscuro.png'), full_page=True)
         await pg.reload()
+        await pg.locator('#dropzone').hover()   # el motor se carga bajo demanda (desde 2.4.2)
         await expect(pg.locator('#engineText')).to_have_text('Motor de análisis listo', timeout=120000)
         check('el tema oscuro persiste al recargar', await pg.evaluate("document.documentElement.dataset.theme") == 'dark')
         await pg.click('#themeAuto')
@@ -215,7 +220,7 @@ async def run(shots):
         await pg.click('.paste summary')
         await pg.fill('#pasteInput', 'ATGAAACCCGGGTTTTAGGAATTCATG')
         await pg.click('#pasteBtn')
-        check('pegar una secuencia', await waitjs(pg, "window.__rmf.state.fileName === 'secuencia_pegada.fasta'", 30))
+        check('pegar una secuencia', await waitjs(pg, "window.__rmf.state.fileName === 'secuencia_pegada.fasta' && document.getElementById('loaderBody').hidden", 30))   # esperar a que termine el análisis (la zona de carga se pliega)
         await open_loader(pg)
         await pg.click('[data-example="bam"]')
         ok = await waitjs(pg, "window.__rmf.state.kind === 'bam' || !document.getElementById('dropError').hidden", 60)
@@ -243,6 +248,7 @@ async def run(shots):
         m = await ctx.new_page()
         await m.set_viewport_size({'width': 390, 'height': 844})
         await m.goto(base)
+        await m.locator('#dropzone').hover()   # el motor se carga bajo demanda (desde 2.4.2)
         await expect(m.locator('#engineText')).to_have_text('Motor de análisis listo', timeout=120000)
         overflow = await m.evaluate("document.documentElement.scrollWidth > window.innerWidth + 1")
         check('móvil: sin desbordamiento horizontal', not overflow)

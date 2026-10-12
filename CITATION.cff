@@ -1,9 +1,12 @@
 cff-version: 1.2.0
-message: If you use READMYFASTA, please cite this software.
+message: >-
+  If you use READMYFASTA, please cite this software.
+  Copyright (c) 2026 glix-cmd. All rights reserved: the tool is free to use,
+  but the code may not be copied, modified or redistributed without permission (see LICENSE).
 type: software
 title: READMYFASTA
-version: 2.4.2
-date-released: "2026-10-01"
+version: 2.5.0
+date-released: "2026-10-11"
 authors:
   - name: glix-cmd
 repository-code: https://github.com/glix-cmd/readmyfasta

@@ -19,6 +19,12 @@ permiso. Ver [Licencia](#licencia), `LICENSE` y `legal.html`.
   bases ≥ Q30, %GC, curva de calidad por posición y avisos), con las cifras reales del archivo de ejemplo. Un botón abre
   el análisis completo. En pantallas estrechas se oculta para no alargar la página.
 - Caché del modo sin conexión renovada (`rmf-v2.5.0`) para que todos los visitantes reciban la nueva versión.
+- **Integración continua activa**: el flujo de pruebas estaba en `workflows/` y GitHub solo los ejecuta desde
+  `.github/workflows/`. Ahora también comprueba que `vendor/` es idéntico a los paquetes oficiales.
+- **Librerías íntegras**: cinco archivos de `vendor/` tenían finales de línea de Windows (CRLF) y no pasaban
+  `tools/vendor.py`. Se restauran y `.gitattributes` impide que Git vuelva a convertirlos.
+- **Suite de navegador al día**: se adapta a la carga diferida del motor (que además ahora se comprueba) y se
+  corrige una carrera de tiempos al pegar una secuencia. 38/38 comprobaciones.
 
 ## Cambios en 2.4.2
 
@@ -103,7 +109,7 @@ Es un sitio 100 % estático: sube la carpeta completa tal cual.
 python -m pytest -q tests/test_core.py        # motor Python: 19 pruebas, ~3 s, sin navegador
 
 pip install playwright && python -m playwright install chromium
-python tests/e2e.py                           # 37 comprobaciones en Chromium (arranca su servidor)
+python tests/e2e.py                           # 38 comprobaciones en Chromium (arranca su servidor)
 python tests/e2e.py --shots capturas/         # además guarda capturas en claro y oscuro
 ```
 
